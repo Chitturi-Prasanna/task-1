@@ -1,0 +1,69 @@
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+    <h3>
+        Personal Information
+    </h3>
+    <p>
+        Tell us a bit about yourself
+    </p>
+    <mat-divider></mat-divider>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="First Name" formControlName="firstName" required>
+            @if (formGroup.controls['firstName'].hasError('required')) {
+            <mat-error color="primary">Email name is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Last Name" formControlName="lastName" required>
+            @if (formGroup.controls['lastName'].hasError('required')) {
+            <mat-error color="primary">Email name is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-select formControlName="gender" required>
+                @for (field of gender; track field) {
+                <mat-option [value]="field.value">{{ field.viewValue }}</mat-option>
+                }
+            </mat-select>
+            @if (formGroup.controls['gender'].hasError('required')) {
+            <mat-error color="primary">Gender is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if (formGroup.controls['dob'].hasError('required')) {
+            <mat-error>Date of Birth is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Phone Number" formControlName="phoneNumber" required>
+            @if (formGroup.controls['phoneNumber'].hasError('required')) {
+            <mat-error color="primary">Phone Number is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
+
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Address" formControlName="address" required>
+            @if (formGroup.controls['address'].hasError('required')) {
+            <mat-error color="primary">Address is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
+
+    <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+    </div>
+</form>

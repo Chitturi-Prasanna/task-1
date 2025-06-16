@@ -1,0 +1,55 @@
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+  <h3>Education Background</h3>
+  <p>Tell us about your academic history</p>
+  <mat-divider></mat-divider>
+
+  @for (educationGroup of typedEducationArray; track $index) {
+    <p>Education Entry #{{$index +1}}</p>
+    @if(educationArray.length > 1){
+        <button mat-icon-button color="warn" aria-label="Remove Education" (click)="onRemoveClick($index)"></button>
+        <mat-icon>delete</mat-icon>
+    }
+
+    <div [formGroup]="educationGroup" style="margin-bottom: 2rem;">
+      <mat-form-field class="form-field">
+        <input matInput placeholder="High School Name" formControlName="highSchool" required>
+        @if (educationGroup.get('highSchool')?.hasError('required')) {
+          <mat-error color="primary">High School Name is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="form-field">
+        <input matInput placeholder="GPA" formControlName="gpa" required>
+        @if (educationGroup.get('gpa')?.hasError('required')) {
+          <mat-error color="primary">GPA is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>
+
+      <div class="form-field">
+        <mat-form-field>
+          <input matInput placeholder="Intended Major" formControlName="intendedMajor" required>
+          @if (educationGroup.get('intendedMajor')?.hasError('required')) {
+            <mat-error color="primary">Intended Major <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Secondary Major/Minor" formControlName="secondaryMajor">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="form-field">
+        <textarea matInput placeholder="Extracurricular Activities" formControlName="extracurricular" required></textarea>
+      </mat-form-field>
+
+      <mat-divider></mat-divider>
+    </div>
+  }
+
+  <button mat-raised-button color="primary" class="form-field" (click)="onAddClick()">Add another education entry</button>
+
+  <div>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matStepperNext>Next</button>
+  </div>
+</form>

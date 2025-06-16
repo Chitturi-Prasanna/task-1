@@ -1,0 +1,43 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <h3>
+        Create Your Account
+    </h3>
+    <p>
+        Enter your email and create a password to get started
+    </p>
+    <mat-divider></mat-divider>
+
+    <mat-label>Email</mat-label>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Email Address" formControlName="Email" required>
+            @if (formGroup.controls['Email'].hasError('required')) {
+            <mat-error>Email name is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
+
+    <mat-label>Password</mat-label>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Password" formControlName="Password" type="password" required>
+            @if (formGroup.controls['Password'].hasError('required')) {
+            <mat-error>Email name is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
+
+    <mat-label>Confirm Password</mat-label>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password" required>
+            @if (formGroup.controls['confirmPassword'].hasError('required')) {
+            <mat-error color="warn">Email name is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+    </div>
+
+    <div>
+        <button mat-raised-button matStepperNext type="submit" color="primary">Next</button>
+    </div>
+</form>
