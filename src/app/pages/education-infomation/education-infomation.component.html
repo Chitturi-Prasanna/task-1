@@ -6,8 +6,7 @@
   @for (educationGroup of typedEducationArray; track $index) {
     <p>Education Entry #{{$index +1}}</p>
     @if(educationArray.length > 1){
-        <button mat-icon-button color="warn" aria-label="Remove Education" (click)="onRemoveClick($index)"></button>
-        <mat-icon>delete</mat-icon>
+        <mat-icon (click)="onRemoveClick($index)">delete</mat-icon>
     }
 
     <div [formGroup]="educationGroup" style="margin-bottom: 2rem;">
