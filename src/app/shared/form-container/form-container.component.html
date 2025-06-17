@@ -1,5 +1,5 @@
 <div class="main">
-    <mat-stepper [linear]="isLinear" #stepper>
+    <mat-stepper [linear]="isLinear" #stepper (selectionChange)="onStepChange($event)" [selectedIndex]="selectedIndex">
         <mat-step label="sign-up" [stepControl]="signUp.formGroup">
             <app-sign-up #signUp></app-sign-up>
         </mat-step>
