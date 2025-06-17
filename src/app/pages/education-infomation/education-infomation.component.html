@@ -18,6 +18,13 @@
       </mat-form-field>
 
       <mat-form-field class="form-field">
+        <input matInput placeholder="graduationYear" formControlName="graduationYear"  required>
+        @if (educationGroup.get('graduationYear')?.hasError('required')) {
+          <mat-error color="primary">Graduation Year is <strong>required</strong></mat-error>
+        }
+      </mat-form-field>      
+
+      <mat-form-field class="form-field">
         <input matInput placeholder="GPA" formControlName="gpa" required>
         @if (educationGroup.get('gpa')?.hasError('required')) {
           <mat-error color="primary">GPA is <strong>required</strong></mat-error>
@@ -49,6 +56,6 @@
 
   <div class="navigation-buttons">
     <button mat-raised-button matStepperPrevious color="primary">Back</button>
-    <button mat-raised-button matStepperNext color="primary">Next</button>
+    <button mat-raised-button matStepperNext color="primary" [disabled]="formGroup.invalid">Next</button>
   </div>
 </form>

@@ -6,7 +6,7 @@
         Tell us a bit about yourself
     </p>
     <mat-divider></mat-divider>
-    <div>
+    <div class="names">
         <mat-form-field>
             <input matInput placeholder="First Name" formControlName="firstName" required>
             @if (formGroup.controls['firstName'].hasError('required')) {
@@ -64,6 +64,6 @@
 
     <div class="navigation-buttons">
         <button mat-raised-button matStepperPrevious color="primary">Back</button>
-        <button mat-raised-button matStepperNext color="primary">Next</button>
+        <button mat-raised-button matStepperNext color="primary" [disabled]="formGroup.invalid">Next</button>
     </div>
 </form>

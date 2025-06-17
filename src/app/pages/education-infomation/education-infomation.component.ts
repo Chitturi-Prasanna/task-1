@@ -32,6 +32,8 @@ export class EducationInfomationComponent {
     educationArray: this._formBuilder.array([this.createEducationGroup()])
   });
 
+  
+
   get educationArray(): FormArray {
     return this.formGroup.get('educationArray') as FormArray;
   }
@@ -46,7 +48,8 @@ export class EducationInfomationComponent {
       gpa: ['', Validators.required],
       intendedMajor: ['', Validators.required],
       secondaryMajor: [''],
-      extracurricular: ['', Validators.required]
+      extracurricular: ['', Validators.required],
+      graduationYear:['', Validators.required]
     });
   }
 
