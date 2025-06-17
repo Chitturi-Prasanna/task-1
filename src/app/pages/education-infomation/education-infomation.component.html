@@ -6,10 +6,10 @@
   @for (educationGroup of typedEducationArray; track $index) {
     <p>Education Entry #{{$index +1}}</p>
     @if(educationArray.length > 1){
-        <mat-icon (click)="onRemoveClick($index)">delete</mat-icon>
+      <mat-icon (click)="onRemoveClick($index)">delete</mat-icon>
     }
 
-    <div [formGroup]="educationGroup" style="margin-bottom: 2rem;">
+    <div [formGroup]="educationGroup">
       <mat-form-field class="form-field">
         <input matInput placeholder="High School Name" formControlName="highSchool" required>
         @if (educationGroup.get('highSchool')?.hasError('required')) {
@@ -24,7 +24,7 @@
         }
       </mat-form-field>
 
-      <div class="form-field">
+      <div class="form-field major">
         <mat-form-field>
           <input matInput placeholder="Intended Major" formControlName="intendedMajor" required>
           @if (educationGroup.get('intendedMajor')?.hasError('required')) {
@@ -47,8 +47,8 @@
 
   <button mat-raised-button color="primary" class="form-field" (click)="onAddClick()">Add another education entry</button>
 
-  <div>
-    <button mat-button matStepperPrevious>Back</button>
-    <button mat-button matStepperNext>Next</button>
+  <div class="navigation-buttons">
+    <button mat-raised-button matStepperPrevious color="primary">Back</button>
+    <button mat-raised-button matStepperNext color="primary">Next</button>
   </div>
 </form>
