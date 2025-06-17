@@ -52,7 +52,7 @@
     </div>
   }
 
-  <button mat-raised-button color="primary" class="form-field" (click)="onAddClick()">Add another education entry</button>
+  <button mat-raised-button color="primary" class="form-field" (click)="onAddClick()" [disabled]="formGroup.invalid">Add another education entry</button>
 
   <div class="navigation-buttons">
     <button mat-raised-button matStepperPrevious color="primary">Back</button>

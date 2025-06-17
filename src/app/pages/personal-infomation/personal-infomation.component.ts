@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule, provideNativeDateAdapter } from '@angular/material/core';
@@ -33,7 +33,17 @@ interface gender {
   templateUrl: './personal-infomation.component.html',
   styleUrl: './personal-infomation.component.scss'
 })
-export class PersonalInfomationComponent {
+export class PersonalInfomationComponent implements OnInit{
+  ngOnInit() {
+    const storedData = localStorage.getItem('personalInfo');
+    if (storedData) {
+      this.formGroup.patchValue(JSON.parse(storedData));
+    }
+
+    this.formGroup.valueChanges.subscribe(value => {
+      localStorage.setItem('personalInfo', JSON.stringify(value));
+    });
+  }
   private _formBuilder = inject(FormBuilder);
 
   formGroup: FormGroup = this._formBuilder.group({
@@ -52,5 +62,6 @@ export class PersonalInfomationComponent {
 
   onSubmit() {
     console.log(this.formGroup.value)
+    localStorage.setItem('personalInfo',JSON.stringify(this.formGroup.value))
   }
 }

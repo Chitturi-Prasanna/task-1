@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
@@ -24,15 +24,23 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './education-infomation.component.html',
   styleUrl: './education-infomation.component.scss'
 })
-export class EducationInfomationComponent {
+export class EducationInfomationComponent implements OnInit{
+  ngOnInit() {
+    const storedData = localStorage.getItem('educationInfo');
+    if (storedData) {
+      this.formGroup.patchValue(JSON.parse(storedData));
+    }
+
+    this.formGroup.valueChanges.subscribe(value => {
+      localStorage.setItem('educationInfo', JSON.stringify(value));
+    });
+  }
   @Output() resetStepper = new EventEmitter<void>();
   private _formBuilder = inject(FormBuilder);
 
   formGroup = this._formBuilder.group({
     educationArray: this._formBuilder.array([this.createEducationGroup()])
   });
-
-  
 
   get educationArray(): FormArray {
     return this.formGroup.get('educationArray') as FormArray;
@@ -59,13 +67,14 @@ export class EducationInfomationComponent {
 
   onSubmit() {
     console.log(this.formGroup.value.educationArray);
+    localStorage.setItem('educationInfo',JSON.stringify(this.educationArray.value))
   }
 
   onReset(): void {
     this.resetStepper.emit();
   }
 
-  onRemoveClick(index: number): void {
+  onRemoveClick(index: number) {
     this.educationArray.removeAt(index);
   }
 

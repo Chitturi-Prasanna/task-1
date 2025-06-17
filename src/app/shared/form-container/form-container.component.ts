@@ -11,5 +11,5 @@ import { EducationInfomationComponent } from '../../pages/education-infomation/e
   styleUrl: './form-container.component.scss'
 })
 export class FormContainerComponent {
-  isLinear = false;
+  isLinear = true;
 }

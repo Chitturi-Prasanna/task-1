@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +19,18 @@ import { MatDividerModule } from '@angular/material/divider';
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit{
+  ngOnInit() {
+    const storedData = localStorage.getItem('loginInfo');
+    if (storedData) {
+      this.formGroup.patchValue(JSON.parse(storedData));
+    }
+
+    this.formGroup.valueChanges.subscribe(value => {
+      localStorage.setItem('loginInfo', JSON.stringify(value));
+    });
+  }
+  
   private _formBuilder = inject(FormBuilder);
 
   formGroup: FormGroup = this._formBuilder.group({
@@ -30,6 +41,7 @@ export class SignUpComponent {
 
   onSubmit() {
     console.log(this.formGroup.value)
+    localStorage.setItem('loginInfo',JSON.stringify(this.formGroup.value))
   }
 
 }

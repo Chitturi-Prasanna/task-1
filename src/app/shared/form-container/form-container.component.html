@@ -1,13 +1,13 @@
 <div class="main">
-    <mat-stepper [linear]="isLinear" #stepper >
-        <mat-step label="sign-up">
-            <app-sign-up ></app-sign-up>
+    <mat-stepper [linear]="isLinear" #stepper>
+        <mat-step label="sign-up" [stepControl]="signUp.formGroup">
+            <app-sign-up #signUp></app-sign-up>
         </mat-step>
-        <mat-step label="personal infomation">
-            <app-personal-infomation ></app-personal-infomation>
+        <mat-step label="personal infomation" [stepControl]="personalInfo.formGroup">
+            <app-personal-infomation #personalInfo></app-personal-infomation>
         </mat-step>
-        <mat-step label="education infomation">
-            <app-education-infomation (resetStepper)="stepper.reset()"></app-education-infomation>
+        <mat-step label="education infomation" [stepControl]="educationInfo.formGroup">
+            <app-education-infomation (resetStepper)="stepper.reset()" #educationInfo></app-education-infomation>
         </mat-step>
     </mat-stepper>
 </div>
